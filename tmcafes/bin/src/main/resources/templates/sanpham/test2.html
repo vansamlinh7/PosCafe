@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Dashboard Template · Bootstrap v4.6</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link th:href="@{/css/bootstrap-tagsinput.css}" rel="stylesheet">
+
+
+    <script src="https://kit.fontawesome.com/cc9a86152e.js" crossorigin="anonymous"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .img-hover:hover{
+      transform: scale(1.1);
+      }
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+
+ .bg-focus {
+            background: #dddfe0;
+            border-radius: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+
+#table-a thead th {
+    border-bottom:none;
+}
+
+#myTable tbody tr td{
+    vertical-align: middle !important;
+}
+#drop-btn:focus{
+        box-shadow: none !important;
+  }
+
+.pointer{
+     cursor: pointer;
+}
+#search-sp:focus{
+    border-bottom: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Fasttrack CaFe</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-white bg-white pl-md-5 pb-0">
+    <a class=" font-bold px-1" href="#"><i class="fas fa-search"></i></a>
+
+    <select class="form-select form-select-sm rounded-pill py-1 pl-md-2 ml-md-3 border-0 shadow-none text-center pointer"
+            aria-label=".form-select-sm example" style="background:#00dcff6e; min-width:150px">
+        <option selected>Hàng hóa</option>
+        <option value="1">Sản phẩm</option>
+        <option value="2">Dịch vụ</option>
+        <option value="3">........</option>
+    </select>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2 shadow-none" type="search" id="search-sp"
+                   placeholder="Nhập tên hoặc mã hàng"
+                   onfocus="this.placeholder = ''"
+                   onblur="this.placeholder = 'Nhập tên hoặc mã hàng'" aria-label="Search">
+        </form>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item align-middle">
+                <div class="font-bold p-2 h5">
+                    <span class="count-sp text-info">99</span> Mặt hàng
+                </div>
+            </li>
+            <li class="nav-item align-middle">
+                <i class="fas fa-ellipsis-h p-3 border-left"></i>
+            </li>
+            <li class="nav-item align-middle">
+                <a class="nav-link btn btn-sm btn-primary text-white mr-1" href="#"><i class="fas fa-plus"></i> Hàng hóa</a>
+            </li>
+            <li class="nav-item align-middle">
+                <a class="nav-link btn btn-sm btn-primary text-white" href="#"><i class="fas fa-plus"></i>Dịch vụ</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-secondary sidebar collapse">
+             <div class="sidebar-sticky pt-3 ">
+             </div>
+         </nav>-->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-md-4 bg-light " aria-live="polite"
+              aria-atomic="true"
+              style="position: relative; min-height: 200px;">
+            <div class="shadow mx-3 mt-2 bg-light rounded">
+                <div class="row px-md-4 user-select-none">
+                    <div class="align-middle col-lg-12 clearfix p-0">
+                        <span class=" text-primary fw-bolder pointer"
+                              style="font-size:25px; font-weight:600"> Sản Phẩm</span>
+
+                        <span class=" text-warning px-1 font-bold pointer"> Tất cả</span>
+                        <i class="fas fa-grip-lines-vertical"></i>
+                        <span class="px-1 font-bold pointer"> Hàng hóa</span>
+                        <i class="fas fa-grip-lines-vertical"></i>
+                        <span class="px-1 font-bold pointer"> Dịch vụ</span>
+                        <span class="float-right pt-2">
+                        <i class="fas fa-chart-bar btn"></i>
+                        <i class="fas fa-bars btn"></i>
+                    </span>
+
+                    </div>
+                </div>
+                <table class="table table-sm table-dark">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-fixed" id="myTable">
+                            <thead class="bg-light user-select-none">
+                            <tr>
+                                <th style="width:2.5%">
+                                    <div class="form-check" style="height:22px">
+                                        <input class="form-check-input " type="checkbox" id="checkAll">
+                                    </div>
+                                </th>
+                                <th style="width:15%">Hàng hóa</th>
+                                <th style="width:10%">Mã hàng hóa</th>
+                                <th style="width:5%">SL</th>
+                                <th style="width:7.5%">Giá Nhập</th>
+                                <th style="width:7.5%">Giá Bán</th>
+                                <th style="width:10%">Nhóm Hàng</th>
+                                <th style="width:10%">Nhà Sản Xuất</th>
+                                <th style="width:7.5%" class="text-center">Thẻ Kho</th>
+                                <th style="width:12.5%" class="text-center">Hình</th>
+                                <th style="width:12.5%">Loại hàng<i class="fas fa-caret-down pointer pl-md-2"></i></th>
+                            </tr>
+                            </thead>
+                            <tbody class="bg-white">
+                            <tr class="align-middle">
+                                <td>
+                                    <div class="form-check" style="height:22px">
+                                        <input class="form-check-input par-check-1111" type="checkbox">
+                                    </div>
+                                </td>
+                                <td class="font-weight-normal">Hồng trà
+                                    <i id="showChild" class="fas fa-caret-down pointer pl-md-2"></i>
+                                </td>
+                                <td class="font-italic">Nhiều mặt hàng</td>
+                                <td>300</td>
+                                <td>1000</td>
+                                <td>100000</td>
+                                <td>Trà</td>
+                                <td>Trung Quốc</td>
+                                <td class="text-center pointer">
+                                    <i class="fas fa-search-plus"></i>
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <img src="/images/camera.png" class="rounded img-thumbnail pointer" alt="..."
+                                             width="50px">
+                                    </div>
+                                </td>
+                                <td class="text-right text-primary pointer d-flex justify-content-between">
+                                    <i class="py-3 pointer fas fa-pencil-alt"></i>
+                                    <i class="py-3 pointer far fa-copy"></i>
+                                    <i class=" pointer p-3 fas fa-ellipsis-h border-left"></i>
+                                </td>
+                            </tr>
+
+
+                            <tr class="align-middle child  font-italic">
+                                <td class="">
+                                    <div class="form-check" style="height:22px">
+                                        <input class="form-check-input child-check-1111" type="checkbox">
+                                    </div>
+                                </td>
+                                <td class="">Hồng trà size m</td>
+                                <td>HTsizeM</td>
+                                <td>120</td>
+                                <td>12000</td>
+                                <td>20000</td>
+                                <td>Trà</td>
+                                <td>NSX</td>
+                                <td class="text-center">
+                                    <i class="fas fa-search-plus"></i>
+                                </td>
+                                <td class="">
+                                    <div class="text-center">
+                                        <img src="/images/remove.png" class="rounded img-thumbnail pointer" alt="..."
+                                             width="35px" height="35px">
+                                    </div>
+                                </td>
+                                <td class="text-right text-primary pointer d-flex justify-content-between">
+                                    <i class="py-3 pointer fas fa-pencil-alt"></i>
+                                    <i class="py-3 pointer far fa-copy"></i>
+                                    <i class=" pointer p-3 fas fa-ellipsis-h border-left"></i>
+                                </td>
+                            </tr>
+
+                            <tr class="align-middle child  font-italic">
+                                <td class="">
+                                    <div class="form-check" style="height:22px">
+                                        <input class="form-check-input child-check-1111" type="checkbox">
+                                    </div>
+                                </td>
+                                <td class="">Hồng trà size l</td>
+                                <td>HTsizeL</td>
+                                <td>180</td>
+                                <td>15000</td>
+                                <td>25000</td>
+                                <td>Trà</td>
+                                <td>NSX</td>
+                                <td class="text-center">
+                                    <i class="fas fa-search-plus"></i>
+                                </td>
+                                <td class="">
+                                    <div class="text-center">
+                                        <img src="/images/remove.png" class="rounded img-thumbnail pointer" alt="..."
+                                             width="35px" height="35px">
+                                    </div>
+                                </td>
+                                <td class="text-right text-primary pointer d-flex justify-content-between">
+                                    <i class="py-3 pointer fas fa-pencil-alt"></i>
+                                    <i class="py-3 pointer far fa-copy"></i>
+                                    <i class=" pointer p-3 fas fa-ellipsis-h border-left"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/js/bootstrap-tagsinput.js}"></script>
+<script>
+    $('.child').hide();
+    $('#showChild').click(function(e){
+        $('.child').slideToggle();
+    });
+
+    $("#checkAll").click(function(){
+            $('input:checkbox').not(this).prop('checked', this.checked);
+
+    });
+    $(".par-check-1111").click(function(){
+            $('.child-check-1111').not(this).prop('checked', this.checked);
+
+    });
+
+    $('select').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+
+
+    });
+
+
+
+
+
+</script>
+</body>
+
+</html>

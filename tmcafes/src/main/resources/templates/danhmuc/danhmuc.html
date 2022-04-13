@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Dashboard Template · Bootstrap v4.6</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .img-hover:hover{
+      transform: scale(1.1);
+      }
+
+
+
+
+
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script>
+          function updateBangGia(maBG, tenBG, macDinh){
+            $('#updateBangGiaForm input[name="maBG"]').val(maBG);
+            $('#updateBangGiaForm input[name="tenBG"]').val(tenBG);
+            $('#updateBangGiaForm input[name="macDinh"]').prop('checked', (macDinh ==1) ? true: false);
+            $('#updateBangGiaModal').modal('show')
+          }
+          function updateDVT(maDVT, macDinh){
+            $('#updateDVTForm input[name="maDVT"]').val(maDVT);
+            $('#updateDVTForm input[name="macDinh"]').prop('checked', (macDinh ==1) ? true: false);
+            $('#updateDVTModal').modal('show')
+          }
+
+
+
+
+
+
+    </script>
+</head>
+
+
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span data-feather="home"></span>
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            Orders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart"></span>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="users"></span>
+                            Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2"></span>
+                            Reports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers"></span>
+                            Integrations
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Saved reports</span>
+                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Current month
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Last quarter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Social engagement
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Year-end sale
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" aria-live="polite" aria-atomic="true"
+              style="position: relative; min-height: 200px;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Danh mục</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <!-- Button trigger thêm bảng giá modal -->
+                    <button type="button" class="btn-sm btn-outline-primary  m-1" data-toggle="modal"
+                            data-target="#exampleModal">
+                        Thêm Bảng Giá
+                    </button>
+                    <!-- Button trigger thêm đơn vị tính modal -->
+                    <button type="button" class="btn-sm btn-outline-danger m-1" data-toggle="modal"
+                            data-target="#exampleModal2">
+                        Thêm ĐVT
+                    </button>
+                    <!-- Button trigger thêm khu vực modal -->
+                    <button type="button" class="btn-sm btn-outline-warning m-1" data-toggle="modal"
+                            data-target="#exampleModal3">
+                        Thêm Khu Vực
+                    </button>
+                </div>
+            </div>
+            <!--alert-->
+            <div> <!--alert add bảng giá-->
+                <div th:if="${lbg_add_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong> Thêm thành công <strong
+                        class="text-primary">[[${lbg_add_success}]]</strong>.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${lbg_add_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <div th:if="${lbg_add_error ==''}"><strong>Cảnh báo: </strong><strong class="text-primary">Mã Bảng
+                        Giá</strong> không thể để
+                        trống!
+                    </div>
+                    <div th:if="${lbg_add_error !=''}"><strong>Cảnh báo: </strong><strong class="text-primary">[[${lbg_add_error}]]</strong>
+                        đã tồn tại!
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+
+                <!--alert update bảng giá-->
+                <div th:if="${lbg_update_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong>Cập nhật <strong class="text-primary">[[${lbg_update_success}]]</strong>
+                    thành công.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${lbg_update_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <strong>Cảnh báo: </strong>Cập nhật thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+                <!--alert delete bang giá-->
+                <div th:if="${lbg_delete_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong>Xóa <strong class="text-primary">[[${lbg_delete_success}]]</strong>
+                    thành công.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${lbg_delete_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <strong>Cảnh báo: </strong>Xóa thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+                <!--alert add đơn vị tính-->
+                <div th:if="${dvt_add_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong> Thêm thành công <strong
+                        class="text-danger">[[${dvt_add_success}]]</strong>.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${dvt_add_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <div th:if="${dvt_add_error ==''}"><strong>Cảnh báo: </strong><strong class="text-danger">Đơn Vị
+                        Tính</strong> không thể để
+                        trống!
+                    </div>
+                    <div th:if="${dvt_add_error !=''}"><strong>Cảnh báo: </strong><strong class="text-danger">[[${dvt_add_error}]]</strong>
+                        đã tồn tại!
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+                <!--alert update  đơn vị tính-->
+                <div th:if="${dvt_update_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong>Cập nhật <strong class="text-danger">[[${dvt_update_success}]]</strong>
+                    thành công.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${dvt_update_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <strong>Cảnh báo: </strong>Cập nhật thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+                <!--alert delete bang giá-->
+                <div th:if="${dvt_delete_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong>Xóa <strong class="text-warning">[[${dvt_delete_success}]]</strong>
+                    thành công.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${dvt_delete_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <strong>Cảnh báo: </strong>Xóa thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+
+                <!--alert add khu vực-->
+                <div th:if="${kv_add_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong> Thêm thành công <strong
+                        class="text-warning">[[${kv_add_success}]]</strong>.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${kv_add_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <div th:if="${kv_add_error ==''}"><strong>Cảnh báo: </strong><strong class="text-warning">Mã Khu
+                        Vực</strong> không thể để
+                        trống!
+                    </div>
+                    <div th:if="${kv_add_error !=''}"><strong>Cảnh báo: </strong><strong class="text-warning">[[${kv_add_error}]]</strong>
+                        đã tồn tại!
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+                <!--alert delete khu vuc-->
+                <div th:if="${kv_delete_success != null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>Thông báo: </strong>Xóa <strong class="text-warning">[[${kv_delete_success}]]</strong>
+                    thành công.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${kv_delete_error != null}" class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    <strong>Cảnh báo: </strong>Xóa thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--alert-->
+            </div>
+            <nav>
+                <div class="nav nav-pill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active " id="nav-BG-tab" data-toggle="tab" href="#nav-BG"
+                       role="tab"
+                       aria-controls="nav-home" aria-selected="true">Bảng Giá</a>
+                    <a class="nav-item nav-link " id="nav-DVT-tab" data-toggle="tab" href="#nav-DVT" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">Đơn Vị Tính</a>
+                    <a class="nav-item nav-link " id="nav-khuVuc-tab" data-toggle="tab" href="#nav-khuVuc" role="tab"
+                       aria-controls="nav-contact" aria-selected="false">Khu Vực</a>
+
+                </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane my-1 fade show active" id="nav-BG" role="tabpanel" aria-labelledby="nav-BG-tab">
+
+                    <table id="lbg-table" class="table table-hover mt-2">
+                        <thead>
+                        <tr class="">
+                            <th scope="col">#</th>
+                            <th scope="col">Mã Loại Bảng Giá</th>
+                            <th scope="col">Tên Loại Bảng Giá</th>
+                            <th scope="col" class="text-center">Mặc Định</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="lbg: ${ListLoaiBangGia}">
+                            <th scope="row">.</th>
+                            <td>[[${lbg.maBG}]]</td>
+                            <td>[[${lbg.tenBG}]]</td>
+                            <td th:if="${lbg.macDinh == 1}">
+                                <div class="text-center">
+                                    <img th:src="@{/images/check.png}" class="rounded" alt="default"
+                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                         title="Mục này đang được set Mặc Định"
+                                         style=" width:20px"/>
+                                </div>
+                            </td>
+                            <td th:if="${lbg.macDinh !=1}"></td>
+                            <td>
+                                <div class="text-center">
+                                    <a class="btn-sm img-hover" type="button"
+                                       title="click để thay đổi mục này"
+                                       th:data-mabg="${lbg.maBG}" th:data-tenbg="${lbg.tenBG}"
+                                       th:data-macdinh="${lbg.macDinh}"
+                                       onclick="updateBangGia(this.getAttribute('data-mabg'), this.getAttribute('data-tenbg'), this.getAttribute('data-macdinh'))"
+                                    > <img th:src="@{/images/edit.png}" class="rounded p-0" alt="update"
+                                           style=" width:20px"/></a>
+                                    <a th:href="@{|/delete-loai-bang-gia?maBG=${lbg.maBG}|}" type="button"
+                                       class="btn-sm img-hover"
+                                       title="click để xóa mục này"
+                                       onclick="return confirm('Xác nhận xóa mục này?')"><img
+                                            th:src="@{/images/remove.png}" class="rounded p-0" alt="delete"
+                                            style=" width:20px"/></a></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="tab-pane fade" id="nav-DVT" role="tabpanel" aria-labelledby="nav-DVT-tab">
+                    <table class="table table-hover  mt-2">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Đơn vị tính</th>
+                            <th scope="col" class="text-center">Mặc định</th>
+                            <th scope="col" class="text-center">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="dvt: ${listDVT}">
+                            <th scope="row">.</th>
+                            <td>[[${dvt.maDVT}]]</td>
+                            <td th:if="${dvt.macDinh == 1}">
+                                <div class="text-center">
+                                    <img th:src="@{/images/check.png}" class="rounded " alt="..."
+                                         data-toggle="tooltip" data-placement="top"
+                                         title="Trường này được set là mặc định"
+                                         style="width:20px"/>
+                                </div>
+                            </td>
+                            <td th:if="${dvt.macDinh != 1}">
+                            </td>
+                            <td>
+                                <div scope="col" class="text-center">
+                                    <a class="btn-sm img-hover" type="button"
+                                       title="click để thay đổi mục này"
+                                       th:data-madvt="${dvt.maDVT}"
+                                       th:data-macdinhdvt="${dvt.macDinh}"
+                                       onclick="updateDVT(this.getAttribute('data-madvt'), this.getAttribute('data-macdinhdvt'))"
+                                    ><img th:src="@{/images/edit.png}" class="rounded p-0" alt="update"
+                                          style=" width:20px"/></a>
+
+                                    <a th:href="@{|/delete-dvt?maDVT=${dvt.maDVT}|}" type="button"
+                                       class="btn-sm img-hover"
+                                       title="click để xóa mục này"
+                                       onclick="return confirm('Xác nhận xóa mục này?')"><img
+                                            th:src="@{/images/remove.png}" class="rounded p-0" alt="delete"
+                                            style=" width:20px"/></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-khuVuc" role="tabpanel" aria-labelledby="nav-khuVuc-tab">
+                    <table class="table table-hover  mt-2">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã Khu Vực</th>
+                            <th scope="col" class="text-center">Tên Khu Vực</th>
+                            <th scope="col" class="text-center">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="kv: ${listKhuVuc}">
+                            <th scope="row">.</th>
+                            <td>[[${kv.maKV}]]</td>
+                            <td>[[${kv.tenKV}]]</td>
+                            <td>
+                                <div scope="col" class="text-center">
+                                    <a th:href="@{|/delete-khu-vuc?maKV=${kv.maKV}|}" type="button"
+                                       class="btn-sm img-hover"
+                                       title="click để xóa mục này"
+                                       onclick="return confirm('Xác nhận xóa mục này?')"><img
+                                            th:src="@{/images/remove.png}" class="rounded p-0" alt="delete"
+                                            style=" width:20px"/></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<!-- Modal thêm bảng giá -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm <span class="text-info">Loại Bảng Giá</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form th:action="@{/add-loai-bang-gia}" th:object="${loaiBangGia}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="maBG">Mã Bảng Giá:</label>
+                        <input type="text" th:field="*{maBG}" class="form-control" id="maBG" maxlength="5"
+                               aria-describedby="maBG-help" placeholder="nhập mã bảng giá">
+                        <small id="maBG-help" class="form-text text-muted">Không được để trống</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenBG">Tên Bảng Giá:</label>
+                        <input type="text" th:field="*{tenBG}" class="form-control" id="tenBG" maxlength="50"
+                               placeholder="nhập tên bảng giá">
+                    </div>
+                    <div class="form-check">
+                        <input th:field="*{macDinh}" class="form-check-input"
+                               type="checkbox" value="true" id="macDinh">
+                        <label class="form-check-label" for="macDinh" style="user-select:none">
+                            Mặc Định
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal sửa bảng giá -->
+<div class="modal fade" id="updateBangGiaModal" tabindex="-1" role="dialog"
+     aria-labelledby="updateBangGiaModalLable" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateBangGiaModalLable">Cập Nhật <span
+                        class="text-info">Loại Bảng Giá</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="updateBangGiaForm" th:action="@{/update-loai-bang-gia}" th:object="${loaiBangGia}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="maBG">Mã Bảng Giá:</label>
+                        <input readonly type="text" th:field="*{maBG}" class="form-control" maxlength="5"
+                               aria-describedby="maBG-update-help" placeholder="nhập mã bảng giá">
+                    </div>
+                    <div class="form-group">
+                        <label for="tenBG">Tên Bảng Giá:</label>
+                        <input type="text" th:field="*{tenBG}" class="form-control" maxlength="50"
+                               placeholder="nhập tên bảng giá">
+                    </div>
+                    <div class="form-check">
+                        <input th:field="*{macDinh}" class="form-check-input"
+                               type="checkbox" value="true">
+                        <label class="form-check-label" for="macDinh1" style="user-select:none">
+                            Mặc Định
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal  thêm đơn vị tính-->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModa2lLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal2Label">Thêm <span class="text-danger">Đơn Vị Tính</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form th:action="@{/add-DVT}" th:object="${dvt}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="maDVT"> Đơn Vị Tính:</label>
+                        <input type="text" th:field="*{maDVT}" class="form-control" maxlength="5"
+                               aria-describedby="maDVT-help" placeholder="nhập đơn vị tính">
+                        <small id="maDVT-help" class="form-text text-muted">Trường này không được để trống!</small>
+                    </div>
+                    <div class="form-check">
+                        <input th:field="*{macDinh}" class="form-check-input"
+                               type="checkbox" value="1">
+                        <label class="form-check-label" for="macDinh2" style="user-select:none">
+                            Mặc Định
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--modal sửa cconw vị tính-->
+<div class="modal fade" id="updateDVTModal" tabindex="-1" role="dialog"
+     aria-labelledby="updateDVTModalLable" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateDVTModalLable">Cập nhật <span class="text-danger">Đơn Vị Tính</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="updateDVTForm" th:action="@{/update-dvt}" th:object="${dvt}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="maDVT">Đơn vị tính:</label>
+                        <input readonly type="text" th:field="*{maDVT}" class="form-control"
+                               aria-describedby="maDVT-update-help" placeholder="Đơn vị tính">
+                    </div>
+                    <div class="form-check">
+                        <input th:field="*{macDinh}" class="form-check-input"
+                               type="checkbox" value="1">
+                        <label class="form-check-label" for="macDinh3" style="user-select:none">
+                            Mặc Định
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  thêm khu vực-->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModa3lLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal3Label">Thêm <span class="text-warning">Khu Vực</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form th:action="@{/add-khu-vuc}" th:object="${khuVuc}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="maKV"> Mã Khu Vực:</label>
+                        <input type="text" th:field="*{maKV}" class="form-control" maxlength="5"
+                               aria-describedby="maKV-help" placeholder="nhập mã khu vực">
+                        <small id="maKV-help" class="form-text text-muted">Trường này không được để trống!</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenKV"> Tên Khu Vực:</label>
+                        <input type="text" th:field="*{tenKV}" class="form-control" maxlength="50"
+                               aria-describedby="tenKV-help" placeholder="nhập tên khu vực">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+    var tabName = '[[${#httpServletRequest.getParameter('tab')}]]';
+    if (tabName == 'don-vi-tinh') {
+        $('#nav-tab a[href="#nav-DVT"]').tab('show');
+    } else if (tabName == 'bang-gia') {
+        $('#nav-tab a[href="#nav-BD"]').tab('show');
+    } else if (tabName == 'khu-vuc') {
+        $('#nav-tab a[href="#nav-khuVuc"]').tab('show');
+    }
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

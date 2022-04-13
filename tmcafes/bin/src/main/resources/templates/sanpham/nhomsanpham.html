@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Dashboard Template · Bootstrap v4.6</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .img-hover:hover{
+      transform: scale(1.1);
+      }
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+ .bg-focus {
+            background: #dddfe0;
+            border-radius: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+#treeNhomHang span {
+            cursor: pointer;
+        }
+
+.img-hover:hover{
+      transform: scale(1.1);
+      }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Fasttrack CaFe</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+                <div class="input-group mb-2">
+                    <span class="input-group-text  bg-dark text-light">Nhóm</span>
+                    <input readonly type="text" id="haha" class="form-control">
+                </div>
+                <ul class="pl-2 fs-3" id="treeNhomHang">
+
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" aria-live="polite" aria-atomic="true"
+              style="position: relative; min-height: 200px;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Sản Phẩm</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button id="btnAddNhomHang" type="button" class="btn btn-sm btn-outline-primary m-1">Thêm Nhóm
+                    </button>
+                    <button id="btnUpdateNhom" type="button" class="btn btn-sm btn-outline-info m-1">Sửa Nhóm</button>
+                    <button onclick="deleteNhomHang()" type="button" class="btn btn-sm btn-outline-danger m-1">Xóa
+                        Nhóm
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-warning m-1">Cập Nhật</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary m-1">ĐVT Khác</button>
+                    <button id="btnAddSanPham" type="button" class="btn btn-sm btn-outline-primary m-1">Thêm SP</button>
+                    <button type="button" class="btn btn-sm btn-outline-info m-1">Chuyển SP</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger m-1">Xóa SP</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning m-1">Thành Phần</button>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-">
+                <div class="table-responsive" style="overflow-x:auto;">
+                    <table class="table table-hover">
+                        <thead class="thead">
+                        <tr >
+                            <th scope="col">#</th>
+                            <th scope="col">Mã Sản Phẩm</th>
+                            <th scope="col">Mã Nhóm</th>
+                            <th scope="col">Tên Sản Phẩm</th>
+                            <th scope="col">Mã DVT</th>
+                            <th scope="col">Số Lượng Đầu Kì</th>
+                            <th scope="col">Giá Trị Đầu Kì</th>
+                            <th scope="col">Is Menu</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listSanPhamBody">
+                            <tr>
+                                <td colspan="9" class="text-center">chọn một nhóm để xem danh sách sản phẩm.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addNhomHang" tabindex="-1" role="dialog" aria-labelledby="them-NH-Modal-Label"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="them-NH-Modal-Label">Thêm nhóm hàng</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/them-nhom-hang}" th:object="${nhomHang}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <input type="hidden" id="maNhom1" th:field="*{maNhom}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tên nhóm:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="tenNhom1" th:field="*{tenNhom}" class="form-control"
+                                               maxlength="50">
+                                        <small class="form-text text-muted">Trường này không được để
+                                            trống!</small>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Loại:</label>
+                                    <div class="col-sm-9">
+                                        <select id="loaiNhom1" th:field="*{loaiNhom}" class="form-control">
+                                            <option th:value="0">Hàng Hóa</option>
+                                            <option th:value="1">Nguyên Liệu</option>
+                                            <option th:value="2">Sản Phẩm Pha Chế</option>
+                                            <option th:value="3">Dịch Vụ Tính Giờ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="hidden" id="maCha1" th:field="*{maCha}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--model update-->
+            <div class="modal fade" id="updateNhomHang" tabindex="-1" role="dialog"
+                 aria-labelledby="update-NH-Modal-Label"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="update-NH-Modal-Label">Nhóm dữ liệu</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/update-nhom-hang}" th:object="${nhomHang}" method="post">
+                            <input type="hidden" th:field="*{maNhom}">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tên nhóm:</label>
+                                    <div class="col-sm-9">
+                                        <input th:field="*{tenNhom}" type="text" class="form-control">
+                                        <small class="form-text text-muted">Trường này không được để
+                                            trống!</small>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Loại: </label>
+                                    <div class="col-sm-9">
+                                        <select th:field="*{loaiNhom}" class="form-control">
+                                            <option th:value="0">Hàng Hóa</option>
+                                            <option th:value="1">Nguyên Liệu</option>
+                                            <option th:value="2">Sản Phẩm Pha Chế</option>
+                                            <option th:value="3">Dịch Vụ Tính Giờ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" th:field="*{maCha}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal sửa bảng giá -->
+            <div class="modal fade" id="updateSanPhamModal" tabindex="-1" role="dialog"
+                 aria-labelledby="updateSanPhamModalLable" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateSanPhamModalLable">Cập Nhật <span
+                                    class="text-info">Sản Phẩm</span></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="updateSanPhamForm" th:action="@{/update-san-pham}" th:object="${sanPham}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Mã Sản Phẩm:</label>
+                                    <input readonly type="text" th:field="*{maSP}" class="form-control" maxlength="20"
+                                           aria-describedby="maBG-update-help">
+                                </div>
+                                <div class="form-group">
+                                    <label >Mã Nhóm:</label>
+                                    <input  readonly type="text"name="maNhomSP" id="maNhomSP"  th:field="*{maNhom}" class="form-control" maxlength="50">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tên Sản Phẩm:</label>
+                                    <input type="text" th:field="*{tenSP}" class="form-control" maxlength="50"
+                                           placeholder="nhập tên sản phẩm">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mã DVT:</label>
+                                    <input readonly type="text" th:field="*{maDVT}" class="form-control" maxlength="7">
+                                </div>
+                                <div class="form-group">
+                                    <label>Số Lượng Đầu Kì:</label>
+                                    <input  type="number" th:field="*{sldk}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Giá Trị Đầu Kì:</label>
+                                    <input  type="number" th:field="*{gtdk}" class="form-control">
+                                </div>
+                                <div class="form-check">
+                                    <input th:field="*{isMenu}" class="form-check-input"
+                                           type="checkbox" value="true">
+                                    <label class="form-check-label" style="user-select:none">
+                                        is Menu
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--            TOAST-->
+            <div class="toast" data-delay="5000" style="position: fixed; bottom: 30px;right: 8px;">
+                <div class="toast-header bg-info">
+                    <img style="width: 20px; height: 20px" th:src="@{/images/edit.png}" class="rounded mr-2" alt="...">
+                    <strong class="mr-auto text-white">Thông báo</strong>
+                    <small class="text-white"> vừa xong</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body bg-light">
+                    Hello, world! This is a toast message.
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+<th:block th:replace="sanpham/popup::popup"></th:block>
+
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+var objNhomHang;
+    var isShowToast = '[[${message}]]';
+    var updateNhomHangMessage = '[[${updateNhomHang}]]';
+    var addNhomHangMessage = '[[${addNhomHang}]]';
+
+    $(document).ready(function () {
+        getTreeNhomHang();
+
+         if (updateNhomHangMessage) {
+            $('.toast .toast-body').text(updateNhomHangMessage);
+            $('.toast').toast('show');
+        }
+
+        if (isShowToast) {
+            $('.toast .toast-body').text(isShowToast);
+            $('.toast').toast('show');
+        }
+
+        if (addNhomHangMessage) {
+            $('.toast .toast-body').text(addNhomHangMessage);
+            $('.toast').toast('show');
+        }
+
+    });
+
+
+    function getTreeNhomHang() {
+        $.ajax({
+            type: 'GET',
+            url: '/list-nhom-hang',
+            success: function (result) {
+                $.each(result, function (index, value) { //object nhom hang
+                    if (value.maCha === '') {
+                        $('#treeNhomHang').append(parentElement(value));
+                    } else {
+                        if (!$('#parent-' + value.maCha + " span").hasClass("caret")) {
+                            $('#parent-' + value.maCha + " span").addClass('caret');
+                        }
+                        $('#parent-' + value.maCha + ' .nested').append(childElement(value));
+                    }
+                });
+
+                var toggler = document.getElementsByClassName("caret");
+                var i;
+                for (i = 0; i < toggler.length; i++) {
+                    toggler[i].addEventListener("click", function () {
+                        this.parentElement.querySelector(".nested").classList.toggle("active");
+                        this.classList.toggle("caret-down");
+                    });
+                }
+            }, error: function (xhr, ajaxOptions, thrownError) {
+            }
+        });
+    }
+
+    function setFocusItem(elm, maNhom, loaiNhom, tenNhom, maCha) {
+        $('#listSanPhamBody').empty();                                  //xóa hết bảng
+        getListSanPham(maNhom);                                     // add cột trong bảng theo maNhom
+        $('#treeNhomHang').find('*').removeClass("bg-focus");       //xóa hết bg
+        $(elm).addClass('bg-focus');
+        objNhomHang = {
+            maNhom: maNhom,
+            loaiNhom: loaiNhom,
+            tenNhom: tenNhom,
+            maCha: maCha
+        };
+          $("#haha").val(tenNhom);
+
+    }
+
+     function getListSanPham(maNhom) {
+        $.ajax({
+            type: 'GET',
+            url: '/list-san-pham',
+            success: function (result) {
+                $.each(result, function (index, value) {
+                    if (value.maNhom === maNhom) {                         //thực hiện nếu maNhom focus = maNhom list
+                        $('#listSanPhamBody').append(showSanPham(value));  //append cột vào table body
+                    };
+                });
+                if($('#listSanPhamBody').children().length >0){
+                    $('#btnAddNhomHang').prop('disabled', true);
+
+                }else{
+                    $('#btnAddNhomHang').prop('disabled', false);
+
+
+
+                }
+            }, error: function (xhr, ajaxOptions, thrownError) {
+            }
+        });
+    }
+
+
+    //tree child
+    function childElement(nhomhang) {
+        return `<li id="parent-${nhomhang.maNhom}">
+                    <span onclick="setFocusItem(this, '${nhomhang.maNhom}', '${nhomhang.loaiNhom}', '${nhomhang.tenNhom}', '${nhomhang.maCha}')">${nhomhang.tenNhom}</span>
+                    <ul class="nested">
+                    </ul>
+                </li>`;
+    }
+    //tree parent
+    function parentElement(nhomhang) {
+        return `<li id="parent-${nhomhang.maNhom}">
+                    <span onclick="setFocusItem(this, '${nhomhang.maNhom}', '${nhomhang.loaiNhom}', '${nhomhang.tenNhom}', '${nhomhang.maCha}')">${nhomhang.tenNhom}</span>
+                    <ul class="nested">
+                    </ul>
+                </li>`
+    }
+    // cột sản phẩm
+    function showSanPham(sanPham){
+        return `<tr>
+                    <th scope="row">#</th>
+                    <td>${sanPham.maSP}</td>
+                    <td>${sanPham.maNhom}</td>
+                    <td>${sanPham.tenSP}</td>
+                    <td>${sanPham.maDVT}</td>
+                    <td>${sanPham.sldk}</td>
+                    <td>${sanPham.gtdk}</td>
+                    <td>${sanPham.isMenu}</td>
+                    <td>
+                       <div class="text-center">
+                            <a class="btn-sm img-hover" type="button"
+                                       onclick="updateSanPham('${sanPham.maSP}','${sanPham.maNhom}',
+                                                              '${sanPham.tenSP}','${sanPham.maDVT}',
+                                                              ${sanPham.sldk},${sanPham.gtdk},
+                                                              ${sanPham.isMenu} ) ">
+                                      <img src="/images/edit.png" class="rounded p-0" alt="update"style=" width:20px"/>
+                           </a>
+
+                            <a th:href="@{|/delete-san-pham?maSP=${sanPham.maSP}|}" type="button"
+                                class="btn-sm img-hover"
+                                title="click để xóa mục này"
+                                onclick="return confirm('Xác nhận xóa mục này?')"><img
+                                   src="/images/remove.png" class="rounded p-0" alt="delete"
+                                   style=" width:20px"/></a></a>
+                       </div>
+                    </td>
+               </tr>`
+    }
+
+
+
+
+
+
+    // update nhóm hàng
+    $('#btnUpdateNhom').click(function () {
+        if (!objNhomHang) {
+            alert("Vui lòng chọn nhóm hàng để thực thi tác vụ!");
+            return;
+        }
+        $('#maNhom').val(objNhomHang.maNhom);
+        $('#tenNhom').val(objNhomHang.tenNhom);
+        $('#loaiNhom').val(objNhomHang.loaiNhom);
+        $('#maCha').val(objNhomHang.maCha);
+        $('#updateNhomHang').modal('show');
+    });
+
+    //thêm nhóm hàng
+    $('#btnAddNhomHang').click(function(){
+        if(!objNhomHang){
+            $('#addNhomHang').modal('show');
+            return;
+        }
+        $('#loaiNhom1').val(objNhomHang.loaiNhom);
+        $('#maCha1').val(objNhomHang.maNhom);
+        $('#addNhomHang').modal('show');
+
+    });
+
+    //xóa nhóm hàng
+    function deleteNhomHang() {
+        if (!objNhomHang) {
+            alert("Vui lòng chọn nhóm hàng cần xóa!");
+            return;
+        }
+
+        var popupConfirm = confirm("Bạn có muốn xóa nhóm [ " + objNhomHang.tenNhom + " ] không?"); // OK canel
+        if (popupConfirm) {
+            document.location.href = "/delete-nhomhang/" + objNhomHang.maNhom;
+        }
+    };
+
+    //update SP
+    function updateSanPham(maSP, maNhom, tenSP, maDVT, sldk, gtdk, isMenu) {
+            $('#updateSanPhamForm input[name="maSP"]').val(maSP);
+            $('#updateSanPhamForm input[id="maNhomSP"]').val(maNhom);
+            $('#updateSanPhamForm input[name="tenSP"]').val(tenSP);
+            $('#updateSanPhamForm input[name="maDVT"]').val(maDVT);
+            $('#updateSanPhamForm input[name="sldk"]').val(sldk);
+            $('#updateSanPhamForm input[name="gtdk"]').val(gtdk);
+            $('#updateSanPhamForm input[name="isMenu"]').prop('checked', (isMenu ==1) ? true: false);
+            $('#updateSanPhamModal').modal('show');
+    }
+      //thêm SP
+    $('#btnAddSanPham').click(function(){
+        if(!objNhomHang){
+             alert("Vui lòng chọn nhóm hàng trước!");
+            return;
+        }
+        $('#maNhomSP2').val(objNhomHang.maNhom);
+        $('#addSanPham').modal('show');
+
+    });
+
+
+</script>
+
+</body>
+
+</html>

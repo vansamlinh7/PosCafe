@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/cc9a86152e.js" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/home11.css}" rel="stylesheet">
+
+    <style>
+    </style>
+</head>
+<body>
+
+<div id="accordian">
+    <div class="logo">
+        <i class="fa fa-coffee" aria-hidden="true"></i> FT Coffee
+    </div>
+
+    <ul class="show-dropdown main-navbar">
+        <div class="selector-active">
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+        <li class="active" refer-for-menu="#contentGoiMon">
+            <a href="javascript:void(0);"><i class="fa fa-bitbucket"></i>Gọi món</a>
+        </li>
+        <li refer-for-menu="#contentDonHang">
+            <a href="javascript:void(0);"><i class="fa fa-list"></i>Đơn hàng</a>
+        </li>
+    </ul>
+    <a class="btn-logout" href="/logout">
+        <i class="fa fa-list"></i>Đăng Xuất
+    </a>
+</div>
+
+<div class="content">
+    <div class="menu-content" id="contentGoiMon">
+
+
+        <div class="container-fluid  pr-0">
+            <div class="row ">
+                <div class="col-md-3 bg-white border-right" style="min-height:100vh; z-index:1000">
+                    <div class="row mb-2 border-bottom d-flex align-items-center" style="height:60px">
+                        <div class="col-md-4">
+                            <button class="btn btn-outline-priary"> Thêm</button>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="pull-right text-right font-bold">
+                                <i class="fas fa-ellipsis-v pr-2"></i>
+                                giờ vào: <span class="text-mute font-italic">18:30</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2 border-bottom">
+                        <div class="col-md-10 m-auto ">
+                            <button class="btn btn-sm btn-custom">
+                                <i class="fas fa-utensils d-block"></i>
+                                Tại quán
+                            </button>
+                            <button class="btn btn-sm btn-custom float-right" onclick="c    honBan()">
+                                <i class="fas fa-coffee d-block"></i><span id="btn-ban"></span> Số chờ
+                            </button>
+                        </div>
+                        <div class="col-md-11 m-auto py-2">
+                            <div class="row">
+                                <div class="col-6 p-0 px-1">
+                                    <button class="btn btn-sm btn-custom w-100">
+                                        <i class="fas fa-user-plus d-block"></i>
+                                        Đối tượng/KH
+                                    </button>
+                                </div>
+
+                                <div class="col-6 p-0 px-1">
+                                    <button class="btn btn-sm btn-custom w-100" onclick="ghiChuTong()"
+                                            id="btn-ghiChuTong">
+                                        <i class="far fa-sticky-note d-block"></i>
+                                        Ghi chú
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush row overflow-scroll" id="list-order"
+                        style="min-height:280px">
+                        <li class="list-group-item list-group-item-action px-1" onclick="editDonHang(2222)">
+                            <div class="row ">
+                                <div class="col-1 ml-1">1</div>
+                                <div class="col-6 font-weight-bold ">Trà sữa</div>
+                                <div class="col-3 ">18.000</div>
+                                <div class="col-1 px-0">
+                                    <i class="fas fa-times btn-x" onclick="removeSP(order-1111)"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-10 m-auto">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text">Tiền hàng</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-right" id="giatien">0</p>
+                                </div>
+                            </div>
+                            <div class="row mb-1 mb-md-2">
+                                <div class="col px-1 ">
+                                    <button class="btn btn-sm btn-pink w-100 p-2">
+                                        <i class="fas fa-undo d-block"></i>
+                                        Hoàn tác
+                                    </button>
+                                </div>
+                                <div class="col px-1 ">
+                                    <button class="btn btn-sm btn-yellow w-100 p-2" id="giamGiaDH">
+                                        <i class="fas fa-gift d-block"></i>
+                                        Giảm giá
+                                    </button>
+                                </div>
+                                <div class="col px-1 ">
+                                    <button class="btn btn-sm btn-custom w-100 p-2">
+                                        <i class="fas fa-print d-block"></i>
+                                        In tạm thời
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <button class=" btn btn-primary btn-block" th:onclick="thanhToan()">Thanh toán
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-9 bg-light pl-0 " style="min-height:300px">
+                    <nav class="navbar navbar-expand-lg navbar-white bg-white pb-1 shadow rounder mb-2">
+                        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                            <form class="form-inline my-2 my-lg-0 bg-light rounded " style="width:90%">
+                                <a class=" font-bold px-3" href="#"><i class="fas fa-search"></i></a>
+                                <input class="form-control mr-sm-2 shadow-none bg-light w-75" type="search"
+                                       id="search-sp"
+                                       placeholder="Nhập tên hàng hóa để tìm kiếm">
+                            </form>
+
+                            <ul class="navbar-nav ml-auto">
+
+                                <li class="nav-item align-middle">
+                                    <i class="fas fa-ellipsis-h p-3 "></i>
+                                </li>
+                                <li class="nav-item align-middle">
+                                    <i class="fas fa-bars p-3"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <div class="row">
+                        <div class="col-md-10 border-right">
+                            <div class="row p-3" id="containerSanPham">
+
+                            </div>
+                        </div>
+                        <div class="col-md-2 bg-white " style="min-height:300px;">
+                            <div class="row">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card m-md-2 shadow rounded border-0 w-75 mx-auto">
+                                        <img onclick="showAllNhom()" class="card-img-top catalog"
+                                             src="/images/camera.png"
+                                             alt="all">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card m-md-2 shadow rounded border-0 w-75 mx-auto">
+                                        <img onclick="nhom('cf')" class="card-img-top catalog" src="/images/ca-phe.jpg"
+                                             alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex justify-content-center">
+                                    <div class="m-md-2 shadow rounded border-0 w-75  mx-auto">
+                                        <img onclick="nhom('ts')" class="card-img-top"
+                                             src="/images/tra-sua-truyen-thong.png"
+                                             alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-content bg-light" id="contentDonHang" style="height: 100vh;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="donhang donhang-plus d-inline-flex ">
+                    <div class="plus">+</div>
+                </div>
+                <div class="donhang">
+                    <p class="w-100 p-2 text-left h5 border-bottom">
+                        <span class="text-primary"> <i class="fas fa-bookmark"></i> Đơn Hàng</span>
+                        <span class="float-right ">
+                            <i class="fas fa-ellipsis-v text-mute"></i>
+                        </span>
+                    </p>
+                    <div class="clearfix"></div>
+                    <p class="w-100 p-2 text-left mb-1">
+                        <span class="text-primary">#</span>
+                        <span class="float-right ">
+                            #
+                        </span>
+                    </p>
+                    <div class="clearfix"></div>
+                    <p class="w-100 p-2 text-left mb-1">
+                        <span class="text-primary">#</span>
+                        <span class="float-right ">
+                            #
+                        </span>
+                    </p>
+                    <hr class="my-1">
+                    <div class="row p-1">
+                        <div class="col-6 border-right">
+                            <button class="btn btn-outline-success">Thanh Toán</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-outline-danger">Chi Tiết ĐH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!--modal thêm sản phẩm-->
+<div class="modal fade themSP" tabindex="-1" role="dialog" aria-labelledby="themSP"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg bg-light">
+        <div class="modal-content ">
+            <div class="modal-header d-flex justify-content-between">
+                <h5 class="modal-title text-custom themSP-ten"></h5>
+                <div class="custom-number-input">
+                    <div class="d-flex align-items-end mt-1">
+                        <button data-action="decrement"
+                                class="input-custom border-right-0 rounded-0 btn btn-outline-primary">
+                            <span class="m-auto">−</span>
+                        </button>
+                        <input type="number"
+                               id="soLuong"
+                               class="input-custom form-control w-50 border-primary rounded-0  m-0"
+                               name="custom-input-number" value="1" min="1" max="100"
+                               style="-webkit-appearance: none;">
+                        <button data-action="increment"
+                                class="input-custom border-left-0 rounded-0 btn btn-outline-primary">
+                            <span class="m-auto">+</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body py-0">
+                <div class="row border-bottom themSP-radio">
+                    <div class="button-wrap w-100">
+                        <input data-masp="2222" data-tensp="Cà Phê" data-gia="10000"
+                               class="hidden radio-label custom-choose-type" type="radio" name="loaiSP"
+                               id="btn-normal"
+                               checked="checked">
+                        <label class="button-label" for="btn-normal">
+                            <h1><span class="themSP-ten"></span>
+                                <p class="text-mute font-italic m-0 py-1">(<span class="btn-normal-gia"
+                                >13000</span>)</p></h1>
+                        </label>
+
+                        <input data-masp="2222A" data-tensp="Cà Phê size M" data-gia="9000"
+                               class="hidden radio-label custom-choose-type" type="radio" name="loaiSP"
+                               id="btn-1">
+                        <label class="button-label" for="btn-1">
+                            <h1>Size M <p class="text-mute font-italic m-0 py-1">(<span
+                            >9000</span>)</p></h1>
+                        </label>
+                        <input data-masp="2222B" data-tensp="Cà Phê size L" data-gia="13000"
+                               class="hidden radio-label custom-choose-type" type="radio" name="loaiSP"
+                               id="btn-2">
+                        <label class="button-label" for="btn-2">
+                            <h1>Size L <p class="text-mute font-italic m-0 py-1">(<span
+                            >13000</span>)</p></h1>
+                        </label>
+                    </div>
+                </div>
+                <div class="row px-3">
+                    <div class="input-group">
+                        <label for="ghiChu" class="h6">Ghi Chú:</label>
+                        <textarea class="form-control input-custom w-100" id="ghiChu"
+                                  rows="4" placeholder="Nhập ghi chú" onfocus="this.placeholder = ''"
+                                  onblur="this.placeholder = 'Nhập ghi chú'"></textarea>
+                    </div>
+                </div>
+                <div class="row px-3 my-2">
+                    <p class="h6 w-100">Giảm Giá:</p>
+                    <div class=" w-100 d-flex justify-content-around my-1">
+                        <button onclick="giamgia(0)" class="btn btn-custom mr-1 px-md-5">0%</button>
+                        <button onclick="giamgia(5)" class="btn btn-custom mr-1 px-md-5">5%</button>
+                        <button onclick="giamgia(10)" class="btn btn-custom mr-1 px-md-5">10%</button>
+                        <button onclick="giamgia(15)" class="btn btn-custom mr-1 px-md-5">15%</button>
+                        <button onclick="giamgia(25)" class="btn btn-custom mr-1 px-md-5">25%</button>
+                        <button onclick="giamgia(50)" class="btn btn-custom mr-1 px-md-5">50%</button>
+                    </div>
+                    <div class=" w-100 d-flex justify-content-around my-1">
+                        <button onclick="giamgia2(0)" class="btn btn-custom mr-1 px-md-5">0%</button>
+                        <button onclick="giamgia2(5000)" class="btn btn-custom mr-1 px-md-5">5k</button>
+                        <button onclick="giamgia2(10000)" class="btn btn-custom mr-1 px-md-5">10k</button>
+                        <button onclick="giamgia2(15000)" class="btn btn-custom mr-1 px-md-5">15k</button>
+                        <button onclick="giamgia2(20000)" class="btn btn-custom mr-1 px-md-5">20k</button>
+                        <button onclick="giamgia2(50000)" class="btn btn-custom mr-1 px-md-5">50%</button>
+                    </div>
+                </div>
+                <div class="row px-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-custom" id="input-giamGia" value="0">
+                        <div class="input-group-append button-loaiGiam">
+                            <input class="d-none" type="radio" name="giam" id="VND" value="VND" checked>
+                            <label class="btn btn-outline-primary rounded-0 border-right-none" for="VND">VND</label>
+                            <input class="d-none" type="radio" name="giam" id="phanTram" value="phanTram">
+                            <label class="btn btn-outline-primary rounded-right" for="phanTram">%</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="addDonHang()">Chọn</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalGhiChu" tabindex="-1" role="dialog" aria-labelledby="modalGhiChuLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalGhiChuLabel">Thêm ghi chú</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-light">
+                <textarea class="form-control input-custom w-100" id="ghiChuTong"
+                          rows="4" placeholder="Nhập ghi chú" onfocus="this.placeholder = ''"
+                          onblur="this.placeholder = 'Nhập ghi chú'"></textarea>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="sumitGhiChuTong()">Cập Nhật</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalChonBan" tabindex="-1" role="dialog" aria-labelledby="chonBanLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chonBanLable">Chọn Bàn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-light" id="listBan">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="sumitChonBan()">Chọn</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal giam gia-->
+<div class="modal fade" id="modalGiamGia" tabindex="-1" role="dialog" aria-labelledby="giamGiaLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="giamGiaLable">Giảm Giá Đơn Hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalGiamGiaBody">
+                <div class="row px-2 my-2  d-flex justify-content-between">
+                    <div>Tiền hàng:</div>
+                    <div class="text-right tienhang">0</div>
+                </div>
+                <div class="row px-2 my-2  d-flex justify-content-between">
+                    <div>Giảm giá:</div>
+                    <div class="text-right " id="soTienGiamDH">0</div>
+                </div>
+                <div class="row px-2 my-2  d-flex justify-content-between border-bottom">
+                    <div>Thanh toán:</div>
+                    <div class="text-right thanhtoan">0</div>
+                </div>
+                <div class="row px-2 my-2  d-flex justify-content-around">
+                    <button class="btn btn-custom mr-1 px-md-5" onclick="giamDH('5','phanTram')">5%</button>
+                    <button class="btn btn-custom mr-1 px-md-5" onclick="giamDH('10','phanTram')">10%</button>
+                    <button class="btn btn-custom mr-1 px-md-5" onclick="giamDH('20','phanTram')">20%</button>
+                    <button class="btn btn-custom mr-1 px-md-5" onclick="giamDH('5000','VND')">5k</button>
+                    <button class="btn btn-custom mr-1 px-md-5" onclick="giamDH('10000','VND')">10k</button>
+                    <button class="btn btn-custom mr-1 px-md-5" onclick="giamDH('50000','VND')">50k</button>
+                </div>
+                <div class="row px-2 my-2  d-flex ">
+                    <div class="col-10">
+                        <input type="number" class="form-control" value="0">
+                    </div>
+                    <div class="col-2">
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <input class="d-none" type="radio" name="loaiGiamGiaDH" id="giam-VND" value="VND"
+                                       checked>
+                                <label for="giam-VND" type="button" class="btn border-warning boder-right-0">VND</label>
+                                <input class="d-none" type="radio" name="loaiGiamGiaDH" id="giam-phanTram"
+                                       value="phanTram" checked>
+                                <label for="giam-phanTram" type="button"
+                                       class="btn border-warning border-left-0">%</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="submitGiamGiaDH()">Chọn</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal thanh toan-->
+<div class="modal fade" id="modalThanhToan" tabindex="-1" role="dialog" aria-labelledby="thanhToanLable"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="thanhToanLable">Thanh Toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalThanhToanBody">
+                <table class="table border-bottom" id="tableThanhToan">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên SP</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Giảm Giá</th>
+                        <th scope="col">Loại Giảm</th>
+                        <th scope="col">Tổng tiền</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableThanhToanBody">
+                    </tbody>
+                </table>
+                <div class="row p-2">
+                    <div class="col-md-6">
+                        <div class="h6">Ghi Chú:</div>
+                        <textarea readonly class="form-control input-custom w-100 show-ghiChu"
+                                  rows="4"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="h6">Thanh Toán:</div>
+                            <ul class="list-group">
+                                <li class="list-group-item">Tổng tiền : <span class="font-weight-bold" id="thanhToan-tongTien">0</span></li>
+                                <li class="list-group-item">Giảm giá đơn hàng : <span class="font-weight-italic" id="thanhToan-giamGia">0</span>
+                                </li>
+                                <li class="list-group-item">Số tiền thực tế : <span class="text-primary font-weight-bold " id="thanhTien">0</span></li>
+                            </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="submitGiamGiaDH()">Chọn</button>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
+    <script th:src="@{/js/inputNum.js}"></script>
+    <script th:src="@{/js/home11.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#search-sp').on('input',function(e){
+                search(this.value);
+            });
+
+
+            function search(val) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/search?keyword=' + val,
+                    success: function (result) {
+                        $('#containerSanPham').html(result);
+                    }, error: function (xhr, ajaxOptions, thrownError) {
+                    }
+                });
+            }
+        });
+
+
+    </script>
+</body>
+</html>

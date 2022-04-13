@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/cc9a86152e.js" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/home11.css}" rel="stylesheet">
+
+    <style>
+        li{
+         position: relative;
+        }
+        .title{
+            position:absolute;
+            background-color: red;
+            right:0;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul class="list-group list-group-flush row overflow-scroll" id="list-order" style="min-height:280px">
+        <li class="list-group-item list-group-item-action px-1" id="order-1111">
+            <div class="row ">
+                <div class="col-1 ml-1">1</div>
+                <div class="col-6 font-weight-bold ">Trà sữa</div>
+                <div class="col-3 ">18.000</div>
+                <div class="col-1 px-0">
+                    <i class="fas fa-times btn-x" onclick="removeSP(order-1111)"></i>
+                </div>
+            </div>
+            <div class="title" style="width:400px; height:200px"></div>
+        </li>
+        <li class="list-group-item list-group-item-action px-1" id="order">
+            <div class="row ">
+                <div class="col-1 ml-1">1</div>
+                <div class="col-6 font-weight-bold ">Trà sữa</div>
+                <div class="col-3 ">18.000</div>
+                <div class="col-1 px-0">
+                    <i class="fas fa-times btn-x" onclick="removeSP(order-1111)"></i>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+</script>
+</body>
+</html>

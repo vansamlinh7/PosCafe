@@ -1,0 +1,369 @@
+body {
+    user-select: none;
+}
+
+.btn-custom {
+    padding: 8px 16px;
+    background-color: #E2EFFF;
+    color: #3B6EB8;
+    border-radius: 10px;
+}
+
+.btn-custom-checked {
+    padding: 8px 16px;
+    background-color: #3B6EB8 !important;
+    color: white !important;
+    border-radius: 10px;
+}
+
+.text-custom {
+    color: #3B6EB8;
+}
+
+.btn-custom:focus, .btn-custom:hover {
+    background-color: #3B6EB8;
+    color: white;
+
+}
+
+.btn-pink {
+    padding: 8px 16px;
+    background-color: #FBD3DA;
+    color: #EF506C;
+    border-radius: 10px;
+}
+
+.btn-pink:hover {
+    background-color: #EF506C;
+    color: white;
+}
+
+.btn-yellow {
+    padding: 8px 16px;
+    background-color: #FFF4D3;
+    color: #F6D682;
+    border-radius: 10px;
+}
+
+.btn-yellow:hover {
+    background-color: #F6D682;
+    color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+i {
+    margin-right: 10px
+}
+
+h2 {
+    margin: 0
+}
+
+h6 {
+    margin: 0;
+    color: #777
+}
+
+#accordian {
+    background: #5161ce;
+    width: 190px;
+    padding: 10px 0 10px 10px;
+    float: left;
+    height: 100vh;
+    overflow-x: hidden;
+    position: relative
+}
+
+.main-navbar {
+    position: relative
+}
+
+#accordian li {
+    list-style-type: none
+}
+
+#accordian ul li a {
+    color: rgba(255, 255, 255, .5);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 45px;
+    display: block;
+    padding: 0 20px;
+    transition-duration: .6s;
+    transition-timing-function: cubic-bezier(0.68, -.55, .265, 1.55);
+    position: relative
+}
+
+#accordian > ul > li.active > a {
+    color: #5161ce;
+    background-color: transparent;
+    transition: all .7s
+}
+
+#accordian a:not(:only-child):after {
+    content: "\f105";
+    position: absolute;
+    right: 20px;
+    top: 10%;
+    font-size: 14px;
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    transition: .5s
+}
+
+#accordian .active > a:not(:only-child):after {
+    transform: rotate(90deg)
+}
+
+.selector-active {
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    height: 37px;
+    top: 0;
+    left: 0;
+    transition-duration: .6s;
+    transition-timing-function: cubic-bezier(0.68, -.55, .265, 1.55);
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px
+}
+
+.selector-active .bottom, .selector-active .top {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    right: 0
+}
+
+.selector-active .top {
+    top: -25px
+}
+
+.selector-active .bottom {
+    bottom: -25px
+}
+
+.selector-active .bottom:before, .selector-active .top:before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #5161ce
+}
+
+.selector-active .top:before {
+    left: -25px;
+    top: -25px
+}
+
+.selector-active .bottom:before {
+    bottom: -25px;
+    left: -25px
+}
+
+
+.button-wrap {
+    position: relative;
+    text-align: center;
+    top: 50%;
+}
+
+@media (max-width: 40em) {
+    .button-wrap {
+        margin-top: -1.5em;
+    }
+}
+
+.button-label {
+    display: inline-block;
+    padding: 10px 30px;
+    width: 30%;
+    margin: 0.5em;
+    cursor: pointer;
+    color: #3B6EB8;
+    border-radius: 0.25em;
+    background-color: #E2EFFF;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+    transition: 0.3s;
+    user-select: none;
+}
+
+.button-label h1 {
+    font-size: 1em;
+    font-family: "Lato", sans-serif;
+}
+
+.button-label:hover {
+    background-color: #3B6EB8;
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+}
+
+.button-label:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 40em) {
+    .button-label {
+        padding: 0em 1em 3px;
+        margin: 0.25em;
+    }
+}
+
+.custom-choose-type:checked + .button-label {
+    background-color: #3B6EB8;
+    color: white;
+}
+
+.custom-choose-type:checked + .button-label:hover {
+    background: #3B6EB8;
+    color: #e2e2e2;
+}
+
+.hidden {
+    display: none;
+}
+
+.logo {
+    margin-left: 15px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+img {
+    transition: all .2s ease-in-out;
+}
+
+.sp-item {
+    width: 8rem;
+    height: 8rem;
+    background-color: #E2EFFF;
+    color: #3B6EB8;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.sp-item:hover {
+    transform: scale(1.02);
+    background-color: #3B6EB8;
+    color: white;
+}
+
+.sp-item:hover img, img:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.button-loaiGiam input[type="radio"]:checked + label {
+    background-color: #3B6EB8;
+    color: white;
+
+}
+
+.input-custom {
+}
+
+.input-custom:focus {
+    box-shadow: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.user-none {
+    user-select: none;
+}
+
+.chonban {
+    display: inline-flex;
+    width: 8rem;
+    height: 8rem;
+    background-color: white;
+    border: 3px solid #7979fd;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.soban {
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    color: #7979fd;
+    user-select: none;
+
+}
+
+.ban-duoc-chon {
+    border: 3px solid #edca20 !important;
+    background-color: #ffd407e6e6ccb3b39c80528f !important;
+    color: #7979fd !important;
+}
+
+.chonban:hover {
+    border: 3px solid #edca20;
+    background-color: #ffd407e6e6ccb3b39c80528f;
+
+}
+
+.chonban:hover .soban {
+    color: #edca20;
+}
+
+.btn-logout {
+    position: absolute;
+    bottom: 10px;
+    color: white;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    color: #edca20
+}
+
+.donhang {
+    display: inline;
+    width: 16rem;
+    height: 12rem;
+    background-color: white;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+}
+
+.donhang-plus:hover {
+    border: 2px solid blue;
+
+}
+
+.plus {
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    color: #7979fd;
+    user-select: none;
+    font-size: 35px;
+}
+
+#modalGiamGiaBody input[name='loaiGiamGiaDH']:checked + label {
+    background-color: #F6D682;
+    color: white;
+    border-color: #F6D682;
+}

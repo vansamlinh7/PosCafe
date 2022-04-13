@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:fragment="fragmentSanPham" th:each="sp : ${result}">
+
+    <div class="card m-md-2 shadow rounded border-0 sp-item"
+         onclick="themSP('333','Trà sữa','15000')" th:data-detail="${utils.toJson(sp.value)}">
+        <img src="/images/tra-sua-truyen-thong2.jpg" class="card-img-top" alt="..."
+             height="80%">
+        <input type="hidden" value="ts">
+        <div class="card-body p-1">
+            <p class="card-title text-center text-truncate" th:text="${#lists.size(sp.value) > 1 ? sp.value[0].tenGroupSP : sp.value[0].tenSP}"></p>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>
